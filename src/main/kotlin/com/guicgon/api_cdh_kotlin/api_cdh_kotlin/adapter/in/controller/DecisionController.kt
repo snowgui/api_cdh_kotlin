@@ -6,16 +6,22 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
-
 @RestController
-@RequestMapping("int")
-class IntController {
-    @GetMapping("{value}")
-    fun get(@PathVariable value: Int) : Int = value
-    @GetMapping("int-or-zero", "int-or-zero/{value}")
-    fun intOrZero(@PathVariable value: String?) : ResponseEntity<Int>{
+@RequestMapping("decision")
+class DecisionController {
 
-        val response = value?.toIntOrNull() ?: 0
+    @GetMapping("note-with-when/{nota}")
+    fun noteWithWhen(@PathVariable nota: Int): ResponseEntity<String> {
+
+        val response: String = when(nota){
+
+            10, 9 -> "Fántastico"
+            8, 7 -> "Parabéns"
+            6, 5, 4 -> "Tem como recuperar"
+            in 0..3 -> "Te vejo no próximo semestre"
+            else -> "Nota inválida"
+
+        }
 
         return ResponseEntity.ok().body(response)
 
