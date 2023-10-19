@@ -13,7 +13,7 @@ class OperatorController {
     @GetMapping("destructor")
     fun destructor(): ResponseEntity<String>{
 
-        val (marca, modelo) = Carro("Ford", "Fusion")
+        val (marca, modelo) = Carro("Ford", "Fusion", 1991)
 
         return ResponseEntity.ok().body("$marca $modelo")
 
