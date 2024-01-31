@@ -11,29 +11,35 @@ class StringController {
     fun get(): ResponseEntity<String> {
         return ResponseEntity.ok().body("Hello World!")
     }
+
     @GetMapping("completeWithValue/{len}/{value}", "completeWithValue/{len}")
     fun completeWithValue(
-        @PathVariable len: Int,
-        @PathVariable value: String? = "",
+            @PathVariable len: Int,
+            @PathVariable value: String? = "",
     ): ResponseEntity<String> {
 
-        var strLen = ""
-        val str = value ?: ""
-        for (x in 1..len) strLen += "0"
+        try {
 
-        val response = ("$strLen$str").substring(str.length)
-        // val response ("0000$str").substring(str.length)
+            var strLen = ""
+            val str = value ?: ""
+            for (x in 1..len) strLen += "0"
+            val response = ("$strLen$str").substring(str.length)
 
-        return ResponseEntity.ok().body(response)
+            return ResponseEntity.ok().body(response)
 
+        } catch (ex: Exception) {
+            return ResponseEntity.internalServerError().body("erro interno")
+        }
     }
+
     @GetMapping("completeWithFourZeroValue/{value}")
     fun completeWithFourZeroValue(
-        @PathVariable value: String,
+            @PathVariable value: String,
     ): ResponseEntity<String> = ResponseEntity.ok().body("0000$value".substring(value.length))
+
     @GetMapping("completeWithFourZeroValueInt/{value}")
     fun completeWithFourZeroValueInt(
-        @PathVariable value: Int,
+            @PathVariable value: Int,
     ): ResponseEntity<String> = ResponseEntity.ok().body(String.format("%04d", value))
-    
+
 }
