@@ -2,6 +2,7 @@ package com.guicgon.api_cdh_kotlin.api_cdh_kotlin.adapter.`in`.controller
 
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("string")
